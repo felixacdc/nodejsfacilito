@@ -16,4 +16,4 @@ http.createServer(function(req, res) {
 	
 }).listen(8080);
 
-// curl -I localhost:8080: si lo escribimos en consola nos muestra el encabezado de la peticion
+// curl -I localhost:8080 si lo escribimos en consola nos muestra el encabezado de la peticion
