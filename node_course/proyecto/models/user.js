@@ -2,6 +2,8 @@ var mongoose = require("mongoose");
 
 var Schema = mongoose.Schema;
 
+mongoose.Promise = global.Promise;
+mongoose.connect("mongodb://localhost/fotos");
 /**
 	tipos de datos en mongo
 	String
@@ -23,3 +25,6 @@ var user_schema = new Schema({
 	date_of_birth: Date
 });
 
+var User = mongoose.model('User', user_schema);
+
+module.exports.User = User;
