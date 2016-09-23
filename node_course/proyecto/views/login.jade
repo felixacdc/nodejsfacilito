@@ -1,36 +1,16 @@
 extends ./layout.jade
 block contenido
-	form(action="/users", method="POST", class="container")
+	form(action="/sessions", method="POST", class="container")
 		div(class="row")
 			div(class="col-md-3")
 			div(class="col-md-6")
-				h1(class="text-center") Registro
+				h1(class="text-center") Login
 				hr
-				div(class="form-group")
-					label(for="name") Nombres
-					input(type="text", name="name", placeholder="Nombres", id="name", class="form-control")
-				div(class="form-group")
-					label(for="last_name") Apellidos
-					input(type="text", name="last_name", placeholder="Apellidos", id="last_name", class="form-control")
-				div(class="form-group")
-					label(for="age") Edad
-					input(type="number", name="age", placeholder="Edad", id="age", class="form-control")
 				div(class="form-group")
 					label(for="email") Email
 					input(type="text", name="email", placeholder="Email", id="email", class="form-control")
 				div(class="form-group")
-					label(for="username") Nombre de usuario
-					input(type="text", name="username", placeholder="Nombre de usuario", id="username", class="form-control")
-				div(class="form-group")
 					label(for="password") Contraseña
 					input(type="password", name="password", placeholder="Contraseña", id="password", class="form-control")
-				div(class="form-group")
-					label(for="password_confirmation") Confirma tu Contraseña
-					input(type="password", name="password_confirmation", placeholder="Confirma tu contraseña", id="password_confirmation", class="form-control")
-				div(class="form-group")
-					label(for="sex") Sexo
-					select(name="sex", id="sex", class="form-control")
-						option(value="M") Masculino
-						option(value="F") Femenino
 				div
 					input(type="submit", value="Iniciar sesión", class="btn btn-info")

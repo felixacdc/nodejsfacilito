@@ -15,11 +15,15 @@ app.get("/", function (request, response) {
 	response.render("index");
 });
 
-app.get("/login", function (request, response) {
+app.get("/signup", function (request, response) {
 	User.find(function(err, doc) {
 		console.log(doc);
-		response.render("login");
+		response.render("signup");
 	});
+});
+
+app.get("/login", function (request, response) {
+	response.render("login");
 });
 
 app.post("/users", function(request, response) {
@@ -53,6 +57,15 @@ app.post("/users", function(request, response) {
 		}
 	});
 	
+});
+
+app.post("/sessions", function(request, response) {
+
+	User.findOne({email: request.body.email, password: request.body.password}, function(error, docs) {
+		console.log(docs);
+		console.log("hola mundo");
+	});
+
 });
 
 app.listen(8080);
