@@ -35,13 +35,22 @@ app.post("/users", function(request, response) {
 		sex: request.body.sex
 	});
 
-	console.log(user.password_confirmation);
-
-	user.save(function(error) {
+	// Forma de guardar con EcmaScript 5
+	/*user.save(function(error, user, numberRows) {
 		if ( error ) {
 			console.log(String(error));
 		}
 		response.send("Guardamos tus datos");
+	});*/
+
+	// Forma de guardar con EcmaScript 6 (promesas)
+	user.save().then(function(user){
+		response.send("Guardamos el usuario");
+	}, function(error) {
+		if ( error ) {
+			console.log(String(error));
+			response.send("No pudimos guardar el usuario");
+		}
 	});
 	
 });
