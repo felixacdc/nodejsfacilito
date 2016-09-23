@@ -25,10 +25,14 @@ app.get("/login", function (request, response) {
 app.post("/users", function(request, response) {
 
 	var user = new User({
-		email: request.body.email, 
+		name: request.body.name,
+		last_name: request.body.last_name,
+		age: request.body.age,
+		email: request.body.email,
+		username: request.body.username,
 		password: request.body.password, 
 		password_confirmation: request.body.password_confirmation,
-		username: request.body.username
+		sex: request.body.sex
 	});
 
 	console.log(user.password_confirmation);
