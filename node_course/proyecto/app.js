@@ -23,7 +23,14 @@ app.get("/login", function (request, response) {
 });
 
 app.post("/users", function(request, response) {
-	var user = new User({email: request.body.email, password: request.body.password});
+
+	var user = new User({
+		email: request.body.email, 
+		password: request.body.password, 
+		password_confirmation: request.body.password_confirmation
+	});
+
+	console.log(user.password_confirmation);
 
 	user.save(function() {
 		response.send("Guardamos tus datos");
