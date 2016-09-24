@@ -1,6 +1,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var User = require("./models/user").User;
+var session = require("express-session");
 
 var app = express();
 
@@ -9,9 +10,16 @@ app.use(bodyParser.json());
 // extended define con que algoritmo va a hacer el parsin la libreria cuando es false no se puede parsear arreglos, objetos, etc.
 app.use(bodyParser.urlencoded({extended: true}));
 
+app.use(session({
+	secret: "123buhbsdan12ub",
+	resave: false,
+	saveUninitialized: false
+}));
+
 app.set("view engine", "jade");
 
 app.get("/", function (request, response) {
+	console.log(request.session.user_id);
 	response.render("index");
 });
 
@@ -61,9 +69,9 @@ app.post("/users", function(request, response) {
 
 app.post("/sessions", function(request, response) {
 
-	User.findOne({email: request.body.email, password: request.body.password}, function(error, docs) {
-		console.log(docs);
-		console.log("hola mundo");
+	User.findOne({email: request.body.email, password: request.body.password}, function(error, user) {
+		request.session.user_id = user._id;
+		response.send("hola mundo");
 	});
 
 });
