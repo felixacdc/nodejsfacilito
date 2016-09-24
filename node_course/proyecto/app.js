@@ -2,6 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var User = require("./models/user").User;
 var session = require("express-session");
+var router_app = require("./router_app");
 
 var app = express();
 
@@ -17,6 +18,9 @@ app.use(session({
 }));
 
 app.set("view engine", "jade");
+
+/* /app */
+/* / */
 
 app.get("/", function (request, response) {
 	console.log(request.session.user_id);
@@ -75,5 +79,7 @@ app.post("/sessions", function(request, response) {
 	});
 
 });
+
+app.use("/app", router_app);
 
 app.listen(8080);
