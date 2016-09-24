@@ -2,7 +2,8 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var User = require("./models/user").User;
 var session = require("express-session");
-var router_app = require("./router_app");
+var router_app = require("./routes_app");
+var session_middleware = require("./middlewares/session");
 
 var app = express();
 
@@ -80,6 +81,7 @@ app.post("/sessions", function(request, response) {
 
 });
 
+app.use("/app", session_middleware);
 app.use("/app", router_app);
 
 app.listen(8080);
