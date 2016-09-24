@@ -76,7 +76,7 @@ app.post("/sessions", function(request, response) {
 
 	User.findOne({email: request.body.email, password: request.body.password}, function(error, user) {
 		request.session.user_id = user._id;
-		response.send("hola mundo");
+		response.redirect("/app");
 	});
 
 });

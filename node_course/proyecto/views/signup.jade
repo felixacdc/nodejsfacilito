@@ -32,7 +32,9 @@ block contenido
 					select(name="sex", id="sex", class="form-control")
 						option(value="M") Masculino
 						option(value="F") Femenino
-				div
-					input(type="submit", value="Registrar", class="btn btn-info")
-				br
-				br
+				div(class="row little-bottom-space")
+					div(class="col-xs-12 col-sm-6")
+						input(type="submit", value="Registrar", class="btn btn-info")
+					div(class="col-xs-12 col-sm-6 text-right")
+						a(href="/login") Ya tengo cuenta
+				
