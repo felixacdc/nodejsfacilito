@@ -1,5 +1,5 @@
 var express = require("express");
-
+var Imagen = require("./models/imagenes");
 var router = express.Router();
 
 router.get("/", function (request, response) {
@@ -32,7 +32,20 @@ router.route("/imagenes")
 
 	})
 	.post(function(request, response) {
+		var data = {
+			title: request.body.title
+		};
 
+		var imagen = new Imagen(data);
+
+		imagen.save(function(error) {
+			if (true) {
+				response.redirect("/imagenes/" + imagen._id);
+			} else {
+				response.render(error);
+			}
+			
+		});
 	});
 
 module.exports = router;
