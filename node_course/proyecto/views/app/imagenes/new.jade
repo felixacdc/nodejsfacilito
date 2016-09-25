@@ -1,0 +1,18 @@
+extends ../../layout.jade
+block contenido
+	form(action="/imagenes", method="POST", class="container")
+		div(class="row")
+			div(class="col-md-3")
+			div(class="col-md-6")
+				h1(class="text-center") Nueva imagen
+				hr
+				div(class="form-group")
+					label(for="title") Título
+					input(type="text", name="title", placeholder="Título", id="title", class="form-control")
+				div(class="form-group")
+					label(for="archivo") Imagen
+					input(type="file", name="archivo", id="archivo", class="form-control")
+				div(class="row little-bottom-space")
+					div(class="col-xs-12 col-sm-6")
+						input(type="submit", value="Registrar", class="btn btn-info")
+				
