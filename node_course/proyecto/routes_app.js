@@ -18,7 +18,9 @@ router.get("/imagenes/:id/edit", function(request, response) {
 
 router.route("/imagenes/:id")
 	.get(function(request, response) {
-
+		Imagen.findById(request.params.id, function(error, imagen) {
+			response.render('app/imagenes/show', {imagen: imagen});
+		});
 	})
 	.put(function(request, response) {
 
@@ -39,8 +41,8 @@ router.route("/imagenes")
 		var imagen = new Imagen(data);
 
 		imagen.save(function(error) {
-			if (true) {
-				response.redirect("/imagenes/" + imagen._id);
+			if ( !error ) {
+				response.redirect("/app/imagenes/" + imagen._id);
 			} else {
 				response.render(error);
 			}
