@@ -19,9 +19,6 @@ app.use(cookieSession({
 
 app.set("view engine", "jade");
 
-/* /app */
-/* / */
-
 app.get("/", function (request, response) {
 	console.log(request.session.user_id);
 	response.render("index");

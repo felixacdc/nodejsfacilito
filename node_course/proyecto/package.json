@@ -4,7 +4,7 @@
   "description": "proyecto del curso",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon app.js"
   },
   "author": "Felix",
   "license": "ISC",
@@ -15,5 +15,8 @@
     "express-session": "^1.14.1",
     "jade": "^1.11.0",
     "mongoose": "^4.6.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.7.0"
   }
 }
