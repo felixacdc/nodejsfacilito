@@ -13,7 +13,9 @@ router.get("/imagenes/new", function(request, response) {
 });
 
 router.get("/imagenes/:id/edit", function(request, response) {
-
+	Imagen.findById(request.params.id, function(error, imagen) {
+		response.render('app/imagenes/edit', {imagen: imagen});
+	});
 });
 
 router.route("/imagenes/:id")
@@ -23,7 +25,16 @@ router.route("/imagenes/:id")
 		});
 	})
 	.put(function(request, response) {
-
+		Imagen.findById(request.params.id, function(error, imagen) {
+			imagen.title = request.body.title;
+			imagen.save(function(error) {
+				if ( !error ) {
+					response.render('app/imagenes/show', {imagen: imagen});
+				} else {
+					response.render("app/imagenes/" + imagen.id + "/edit", {imagen: imagen});
+				}
+			});
+		});
 	})
 	.delete(function(request, response) {
 
