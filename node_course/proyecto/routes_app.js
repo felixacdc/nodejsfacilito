@@ -31,7 +31,13 @@ router.route("/imagenes/:id")
 
 router.route("/imagenes")
 	.get(function(request, response) {
-
+		Imagen.find({}, function(error, imagenes) {
+			if ( !error ) {
+				response.render('app/imagenes/index', {imagenes: imagenes});
+			} else {
+				response.render(error);
+			}
+		});
 	})
 	.post(function(request, response) {
 		var data = {

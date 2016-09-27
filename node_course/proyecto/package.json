@@ -4,7 +4,7 @@
   "description": "proyecto del curso",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon *.*"
   },
   "author": "Felix",
   "license": "ISC",
