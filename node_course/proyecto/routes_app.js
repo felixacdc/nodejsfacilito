@@ -12,28 +12,26 @@ router.get("/imagenes/new", function(request, response) {
 	response.render('app/imagenes/new');
 });
 
+var image_finder_middleware = require("./middlewares/find_image");
+
+router.all("/imagenes/:id*", image_finder_middleware);
+
 router.get("/imagenes/:id/edit", function(request, response) {
-	Imagen.findById(request.params.id, function(error, imagen) {
-		response.render('app/imagenes/edit', {imagen: imagen});
-	});
+	response.render('app/imagenes/edit');
 });
 
 router.route("/imagenes/:id")
 	.get(function(request, response) {
-		Imagen.findById(request.params.id, function(error, imagen) {
-			response.render('app/imagenes/show', {imagen: imagen});
-		});
+		response.render('app/imagenes/show');
 	})
 	.put(function(request, response) {
-		Imagen.findById(request.params.id, function(error, imagen) {
-			imagen.title = request.body.title;
-			imagen.save(function(error) {
-				if ( !error ) {
-					response.render('app/imagenes/show', {imagen: imagen});
-				} else {
-					response.render("app/imagenes/" + imagen.id + "/edit", {imagen: imagen});
-				}
-			});
+		response.locals.imagen.title = request.body.title;
+		response.locals.imagen.save(function(error) {
+			if ( !error ) {
+				response.render('app/imagenes/show');
+			} else {
+				response.render("app/imagenes/" + request.params.id + "/edit");
+			}
 		});
 	})
 	.delete(function(request, response) {
