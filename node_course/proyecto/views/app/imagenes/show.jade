@@ -1,6 +1,13 @@
 extends ../../layout.jade
 block contenido
-	h1 #{imagen.title}
-	img(src="/public/imgs/#{imagen._id}.#{imagen.extension}")
-	if ( typeof imagen.creator != "undefined") 
-		p Por #{imagen.creator.email}
+	div(class="container")
+		div(class="row")
+			div(class="col-md-4")
+			div(class="col-md-4")
+				div(class="panel panel-info")
+					div(class="panel-heading")
+						h3(class="panel-title") #{imagen.title}
+					div(class="panel-body")
+						img(src="/public/imgs/#{imagen._id}.#{imagen.extension}", class="img-responsive img-rounded show-img")
+						if ( typeof imagen.creator != "undefined")
+							p(class="text-center") Por #{imagen.creator.email}

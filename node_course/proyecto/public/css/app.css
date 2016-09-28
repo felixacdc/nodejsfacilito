@@ -29,3 +29,9 @@
 .btn-delete-form {
 	display: inline-block;
 }
+
+.show-img {
+	width: 220px;
+	margin-right: auto;
+	margin-left: auto;
+}
