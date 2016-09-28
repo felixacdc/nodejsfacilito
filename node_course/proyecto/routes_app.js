@@ -1,6 +1,7 @@
 var express = require("express");
 var Imagen = require("./models/imagenes");
 var router = express.Router();
+var fs = require("fs");
 
 router.get("/", function (request, response) {
 	/* Buscar el usuario */
@@ -56,15 +57,18 @@ router.route("/imagenes")
 		});
 	})
 	.post(function(request, response) {
+		var extension = request.body.archivo.name.split(".").pop();
 		var data = {
 			title: request.body.title,
-			creator: response.locals.user._id
+			creator: response.locals.user._id,
+			extension: extension
 		};
 
 		var imagen = new Imagen(data);
 
 		imagen.save(function(error) {
 			if ( !error ) {
+				fs.rename(request.body.archivo.path, "public/imgs/" + imagen._id + "." + extension);
 				response.redirect("/app/imagenes/" + imagen._id);
 			} else {
 				response.render(error);
