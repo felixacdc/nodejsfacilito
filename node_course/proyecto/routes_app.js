@@ -4,8 +4,15 @@ var router = express.Router();
 var fs = require("fs");
 
 router.get("/", function (request, response) {
-	/* Buscar el usuario */
-	response.render("app/home");
+	Imagen.find({})
+		.populate("creator")
+		.exec(function(error, imagenes) {
+			if ( error ) {
+				console.log(error);
+			} else {
+				response.render("app/home", {imagenes: imagenes});
+			}
+		});
 });
 
 /* REST */
