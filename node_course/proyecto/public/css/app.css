@@ -25,3 +25,7 @@
 .btn-margin-top {
 	margin-top: 21px;
 }
+
+.btn-delete-form {
+	display: inline-block;
+}
