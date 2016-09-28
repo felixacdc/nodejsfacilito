@@ -4,9 +4,10 @@ block contenido
 		h1(class="text-center") Mis imagenes:
 		for imagen in imagenes
 			div(class="row")
-				div(class="col-md-9")
+				div(class="col-md-8")
 					h3=imagen.title
-				div(class="col-md-3 text-right")
+				div(class="col-md-4 text-right")
+					a(href="/app/imagenes/#{imagen._id}", class="btn btn-warning btn-sm btn-margin-top right-space") Ver
 					a(href="/app/imagenes/#{imagen._id}/edit", class="btn btn-info btn-sm btn-margin-top right-space") Editar
 					form(action="/app/imagenes/#{imagen._id}?_method=DELETE", method="POST", class="btn-delete-form")
 						input(type="submit", value="Eliminar", class="btn btn-danger btn-sm btn-margin-top")
