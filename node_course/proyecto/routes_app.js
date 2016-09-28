@@ -47,7 +47,7 @@ router.route("/imagenes/:id")
 
 router.route("/imagenes")
 	.get(function(request, response) {
-		Imagen.find({}, function(error, imagenes) {
+		Imagen.find({creator: response.locals.user._id}, function(error, imagenes) {
 			if ( !error ) {
 				response.render('app/imagenes/index', {imagenes: imagenes});
 			} else {
@@ -57,7 +57,8 @@ router.route("/imagenes")
 	})
 	.post(function(request, response) {
 		var data = {
-			title: request.body.title
+			title: request.body.title,
+			creator: response.locals.user._id
 		};
 
 		var imagen = new Imagen(data);
