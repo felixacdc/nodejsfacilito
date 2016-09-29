@@ -7,8 +7,11 @@ var session_middleware = require("./middlewares/session");
 var methodOverride = require("method-override");
 var formidable = require("express-formidable");
 var RedisStore = require("connect-redis")(session);
+var http = require("http");
+var realtime = require("./realtime");
 
 var app = express();
+var server = http.Server(app);
 
 app.use("/public", express.static("public"));
 app.use(bodyParser.json());
@@ -20,6 +23,9 @@ var sessionMiddleware = session({
 	store: new RedisStore({}),
 	secret: "super ultra secret word"
 });
+
+realtime(server, sessionMiddleware);
+
 app.use(sessionMiddleware);
 
 app.use(formidable.parse({
@@ -29,7 +35,6 @@ app.use(formidable.parse({
 app.set("view engine", "jade");
 
 app.get("/", function (request, response) {
-	console.log(request.session.user_id);
 	response.render("index");
 });
 
@@ -89,4 +94,4 @@ app.post("/sessions", function(request, response) {
 app.use("/app", session_middleware);
 app.use("/app", router_app);
 
-app.listen(8080);
+server.listen(8080);
