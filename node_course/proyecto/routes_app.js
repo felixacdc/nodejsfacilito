@@ -78,7 +78,13 @@ router.route("/imagenes")
 
 		imagen.save(function(error) {
 			if ( !error ) {
-				client.publish("images", imagen.toString());
+				var imgJSON = {
+					"id": imagen.id,
+					"title": imagen.title,
+					"extension": imagen.extension
+				}
+
+				client.publish("images", JSON.stringify(imgJSON));
 				fs.rename(request.body.archivo.path, "public/imgs/" + imagen._id + "." + extension);
 				response.redirect("/app/imagenes/" + imagen._id);
 			} else {
