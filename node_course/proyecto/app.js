@@ -89,7 +89,7 @@ app.post("/sessions", function(request, response) {
 		response.redirect("/app");
 	});
 
-});
+}); 
 
 app.use("/app", session_middleware);
 app.use("/app", router_app);
