@@ -2,6 +2,9 @@ var express = require("express");
 var Imagen = require("./models/imagenes");
 var router = express.Router();
 var fs = require("fs");
+var redis = require("redis");
+
+var client = redis.createClient();
 
 router.get("/", function (request, response) {
 	Imagen.find({})
@@ -75,6 +78,7 @@ router.route("/imagenes")
 
 		imagen.save(function(error) {
 			if ( !error ) {
+				client.publish("images", imagen.toString());
 				fs.rename(request.body.archivo.path, "public/imgs/" + imagen._id + "." + extension);
 				response.redirect("/app/imagenes/" + imagen._id);
 			} else {
